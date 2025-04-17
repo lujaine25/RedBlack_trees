@@ -88,7 +88,7 @@ class RedBlackTree():
 
      self.root.color = 0
 
-def left_rotate(self, x):
+    def left_rotate(self, x):
      y = x.right
      x.right = y.left
      if y.left != self.TNULL:
@@ -103,19 +103,39 @@ def left_rotate(self, x):
      y.left = x
      x.parent = y
 
-def right_rotate(self, x):
-    y = x.left
-    x.left = y.right
-    if y.right != self.TNULL:
+    def right_rotate(self, x):
+     y = x.left
+     x.left = y.right
+     if y.right != self.TNULL:
         y.right.parent = x
-    y.parent = x.parent
-    if x.parent is None:
+     y.parent = x.parent
+     if x.parent is None:
         self.root = y
-    elif x == x.parent.right:
+     elif x == x.parent.right:
         x.parent.right = y
-    else:
+     else:
         x.parent.left = y
-    y.right = x
-    x.parent = y
+     y.right = x
+     x.parent = y
+
+    def get_black_height(self):
+     if self.root.color == 0:  #exclude the node itself if its black
+        return self.black_height(self.root) - 1
+     else:
+        return self.black_height(self.root)
+
+    def black_height(self, node):
+     if node == self.TNULL:
+        return 0
+     bh = self.black_height(node.left)
+     if node.color == 0: 
+        return 1 + bh
+     else:
+        return bh
+    
+    def tree_size(self, node):
+     if node == self.TNULL:
+        return 0
+     return 1 + self.tree_size(node.left) + self.tree_size(node.right)
 
 
