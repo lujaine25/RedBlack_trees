@@ -140,4 +140,25 @@ class RedBlackTree():
         return 0
      return 1 + self.tree_size(node.left) + self.tree_size(node.right)
 
+    def searchTree(self, k):
+         return self.search_tree_helper(self.root, k)
+
+
+    def search_tree_helper(self, node, key):
+       if node == self.TNULL or key == node.item:
+         return node
+
+       if key < node.item:
+         return self.search_tree_helper(node.left, key)
+       return self.search_tree_helper(node.right, key)
+
+    def get_height(self, node):
+        if node == self.TNULL:
+            return 0
+        left_height = self.get_height(node.left)
+        right_height = self.get_height(node.right)
+        return 1 + max(left_height, right_height)
+
+    def print_height(self):
+        print("Tree Height:", self.get_height(self.root))
 
