@@ -133,7 +133,9 @@ class RedBlackTree():
      else:
         return bh
     
-    def tree_size(self, node):
+    def tree_size(self, node=None):
+     if node is None:
+        node = self.root
      if node == self.TNULL:
         return 0
      return 1 + self.tree_size(node.left) + self.tree_size(node.right)
