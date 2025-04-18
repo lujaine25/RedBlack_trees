@@ -45,6 +45,7 @@ class RedBlackTree():
 
         self.fix_insert(node)
 
+
     def fix_insert(self, node):
      while node != self.root and node.parent.color == 1:
         if node.parent.parent is None:
@@ -88,6 +89,7 @@ class RedBlackTree():
 
      self.root.color = 0
 
+
     def left_rotate(self, x):
      y = x.right
      x.right = y.left
@@ -102,6 +104,7 @@ class RedBlackTree():
         x.parent.right = y
      y.left = x
      x.parent = y
+
 
     def right_rotate(self, x):
      y = x.left
@@ -118,11 +121,13 @@ class RedBlackTree():
      y.right = x
      x.parent = y
 
+
     def get_black_height(self):
      if self.root.color == 0:  #exclude the node itself if its black
         return self.black_height(self.root) - 1
      else:
         return self.black_height(self.root)
+     
 
     def black_height(self, node):
      if node == self.TNULL:
@@ -132,6 +137,7 @@ class RedBlackTree():
         return 1 + bh
      else:
         return bh
+     
     
     def tree_size(self, node=None):
      if node is None:
@@ -139,10 +145,11 @@ class RedBlackTree():
      if node == self.TNULL:
         return 0
      return 1 + self.tree_size(node.left) + self.tree_size(node.right)
+    
 
     def searchTree(self, k):
          return self.search_tree_helper(self.root, k)
-
+    
 
     def search_tree_helper(self, node, key):
        if node == self.TNULL or key == node.item:
@@ -152,6 +159,7 @@ class RedBlackTree():
          return self.search_tree_helper(node.left, key)
        return self.search_tree_helper(node.right, key)
 
+
     def get_height(self, node):
         if node == self.TNULL:
             return 0
@@ -159,6 +167,15 @@ class RedBlackTree():
         right_height = self.get_height(node.right)
         return 1 + max(left_height, right_height)
 
+
     def print_height(self):
         print("Tree Height:", self.get_height(self.root))
+
+
+    def lookup(self, key):
+        node = self.searchTree(key)
+        if node != self.TNULL:
+            print("YES")
+        else:
+            print("NO")
 
